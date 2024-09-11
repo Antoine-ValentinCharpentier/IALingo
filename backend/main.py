@@ -1,5 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+
+from dependencies.auth import has_access
+
+from router.exercice import router as exercice_router 
 
 app = FastAPI()
 
@@ -15,6 +19,6 @@ app.add_middleware(
     allow_headers=["*"], 
 )
 
-@app.get("/")
-async def read_root():
-    return {"message": "Hello, World!"}
+PROTECTED = [Depends(has_access)]
+
+app.include_router(exercice_router, prefix="/exercise", tags=["Exercise"], dependencies=PROTECTED)
