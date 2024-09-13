@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Security
 from fastapi.middleware.cors import CORSMiddleware
 
-from dependencies.auth import has_access
+from middlewares.auth import JWTBearer
 
 from router.exercice import router as exercice_router 
 
@@ -19,6 +19,6 @@ app.add_middleware(
     allow_headers=["*"], 
 )
 
-PROTECTED = [Depends(has_access)]
+PROTECTED = [Security(JWTBearer())]
 
 app.include_router(exercice_router, prefix="/exercise", tags=["Exercise"], dependencies=PROTECTED)
