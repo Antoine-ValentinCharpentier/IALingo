@@ -9,9 +9,9 @@ type PrivatePageProps = {
 };
 
 const PrivatePage: React.FC<PrivatePageProps> = ({ element }): JSX.Element => {
-  const { jwt } = useContext<AuthContextType>(AuthContext);
+  const { user } = useContext<AuthContextType>(AuthContext);
 
-  if (jwt) {
+  if (user) {
     return <Suspense fallback={<Loading />}>{element}</Suspense>;
   }
 

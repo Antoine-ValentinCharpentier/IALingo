@@ -1,13 +1,14 @@
 from fastapi import Request, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-import os
 import jwt
 import requests
 import base64
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
+
+from config import GOOGLE_CLIENT_ID
 
 class JWTBearer(HTTPBearer):
     def __init__(self, auto_error: bool = True):
@@ -44,7 +45,7 @@ class JWTBearer(HTTPBearer):
                 token, 
                 public_key, 
                 algorithms=["RS256"], 
-                audience=os.getenv("GOOGLE_CLIENT_ID", "")
+                audience=GOOGLE_CLIENT_ID
             )
         except jwt.ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Token expired")

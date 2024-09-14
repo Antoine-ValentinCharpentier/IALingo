@@ -13,6 +13,8 @@ services:
       - "8000:8000"
     environment:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REDIRECT_URI=http://localhost:3000
       - OLLAMA_BASE_URL=http://ollama:11434
     depends_on:
       - ollama

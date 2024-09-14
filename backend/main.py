@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from middlewares.auth import JWTBearer
 
 from router.exercice import router as exercice_router 
+from router.auth import router as auth_router 
 
 app = FastAPI()
 
@@ -21,4 +22,5 @@ app.add_middleware(
 
 PROTECTED = [Security(JWTBearer())]
 
+app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(exercice_router, prefix="/exercise", tags=["Exercise"], dependencies=PROTECTED)

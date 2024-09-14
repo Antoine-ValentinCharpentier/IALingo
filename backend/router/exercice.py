@@ -4,7 +4,7 @@ from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 from langchain.prompts.prompt import PromptTemplate
 
-import os
+from config import OLLAMA_BASE_URL
 
 router = APIRouter()
 
@@ -18,7 +18,7 @@ async def get_exercise(request: Request):
     
     summary_prompt_template = PromptTemplate(input_variables=["theme"], template=summary_template)
     
-    llm = ChatOllama(model="llama3.1", temperature=1.0, base_url=os.getenv("OLLAMA_BASE_URL", "https://localhost:11434"))
+    llm = ChatOllama(model="llama3.1", temperature=1.0, base_url=OLLAMA_BASE_URL)
     
     chain = summary_prompt_template | llm | StrOutputParser()
     
