@@ -1,0 +1,124 @@
+/* Banner */
+.header { 
+    position: relative;
+    background: linear-gradient(45deg, 
+        #C96868 0%, 
+        #C96868 12%, 
+        #FADFA1 12%, 
+        #FADFA1 24%, 
+        #F7B5CA 24%, 
+        #F7B5CA 36%, 
+        #FFF4EA 36%, 
+        #FFF4EA 48%, 
+        #7EACB5 48%, 
+        #7EACB5 60%, 
+        #E0E5B6 60%, 
+        #E0E5B6 72%, 
+        #F2C18D 72%, 
+        #F2C18D 84%, 
+        #DFCCFB 84%, 
+        #DFCCFB 100%
+    );
+    height: 60px; 
+    width: 100vw;
+
+    z-index: 1;
+
+    padding: 10px;
+}
+
+.header::after {
+    content: "";
+
+    width: 100%;
+    height: 10px;
+
+    background: linear-gradient(45deg, 
+        #DFCCFB 0%, 
+        #DFCCFB 12%, 
+        #F2C18D 12%, 
+        #F2C18D 24%, 
+        #E0E5B6 24%, 
+        #E0E5B6 36%, 
+        #7EACB5 36%, 
+        #7EACB5 48%, 
+        #FFF4EA 48%, 
+        #FFF4EA 60%, 
+        #F7B5CA 60%, 
+        #F7B5CA 72%, 
+        #FADFA1 72%, 
+        #FADFA1 84%, 
+        #C96868 84%, 
+        #C96868 100%
+    );
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* Title */
+.header-title, .header-title::before {
+    border-radius: 0.5rem;
+    left: 0;
+    right: 0;
+
+    z-index: 2;
+}
+
+.header-title {
+    height: 80%;
+    width: 400px;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header-title::before {
+    background-color: hsla(0, 0%, 100%, 0.6);
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+
+    backdrop-filter: blur(20px);
+
+    content: "";
+}
+
+.header-title p {
+    position: relative;
+    z-index: 3;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 30px;
+    font-weight: 600;
+    font-family: cursive;
+
+    color: #C96868;
+}
+
+.header-title p span {
+    color: #7EACB5;
+}
+
+/* Navbar */
+
+.header-navbar {
+    height: 50%;
+
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.header-navbar svg {
+    color: white;
+}

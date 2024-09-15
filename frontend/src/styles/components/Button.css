@@ -1,0 +1,42 @@
+
+
+.button {
+    width: 100%;
+    background: #C96868;
+    
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    
+    cursor: pointer;
+    display: inline-block;
+
+    font-size: 24px;
+    font-weight: 600;
+    font-family: cursive;
+    line-height: 16px;
+    color: #FFFFFF;
+
+    outline: 0;
+    border: 1px solid #C96868;
+    border-radius: 6px;
+
+    padding: 12px 14px;
+    
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .button:hover,
+  .button:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #C96868;
+  }
+  
+  .button:active {
+    opacity: .5;
+  }

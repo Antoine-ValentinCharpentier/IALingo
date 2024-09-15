@@ -1,0 +1,21 @@
+body,
+#root {
+  width: 100dvw;
+  height: 100dvh;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  width: 100vw;
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+.main-content {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+}

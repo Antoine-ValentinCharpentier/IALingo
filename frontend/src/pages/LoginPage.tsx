@@ -3,6 +3,8 @@ import AuthContext, { AuthContextType, DataGoogleLoginType } from "../context/Au
 import { Navigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import requester from "../utils/requester";
+import TemplatePage from "./TemplatePage";
+import { ScreenEnum } from "../components/Navbar";
 
 type LoginPageProps = {};
 
@@ -30,7 +32,9 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
     return <Navigate to="/" />;
   }
 
-  return <button onClick={() => login()}>Login with Google</button>;
+  return <TemplatePage screen={ScreenEnum.LoginPage}>
+            <button onClick={() => login()}>Login with Google</button>
+          </TemplatePage>
 };
 
 export default LoginPage;
