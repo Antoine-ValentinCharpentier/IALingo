@@ -27,12 +27,6 @@ const Navbar: React.FC<NavbarProps> = ({isOpen, screen}) => {
                     {screen === ScreenEnum.HomePage && (<IoIosArrowForward />)}
                     <p>Home</p>
                 </div>
-                <div className="navbar-item">
-                    Statistiques
-                </div>
-                <div className="navbar-item">
-                    Exercices
-                </div>
             </div>
             <div className="navbar-footer">
                 <Button text="Logout" onClick={handleLogout}/>
