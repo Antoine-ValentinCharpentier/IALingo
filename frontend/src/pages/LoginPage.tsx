@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import AuthContext, { AuthContextType } from "../context/AuthContext";
+import AuthContext, { AuthContextType, DataGoogleLoginType } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
+import requester from "../utils/requester";
 
 type LoginPageProps = {};
 
@@ -13,18 +14,16 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
     onSuccess: async (response) => {
       console.log("Authorization Code:", response);
 
-      const result = await fetch(`http://localhost:8000/auth/token`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          code: response.code,
-        }),
+      const res = await requester.post<DataGoogleLoginType>('/auth/token', {
+        code: response.code,
       });
 
-      const data = await result.json();
-      console.log(data)
+      if(!res.ok || !res.data) {
+        console.log('Failed to get tokens')
+        return;
+      }
+      const data = res.data
+      console.log("axios", data)
       handleLogin(data.data.accessToken, data.data.refreshToken, data.data.user)
     },
     onError: handleLoginError,

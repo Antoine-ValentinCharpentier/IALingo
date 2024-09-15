@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { googleLogout } from "@react-oauth/google";
 import useLocalStorage from "../hooks/useLocalStorage";
+import requester from "../utils/requester";
 
 export interface AuthContextType {
   user: UserType |undefined;
@@ -22,6 +23,17 @@ export interface UserType {
 interface AuthProviderProps {
   children: ReactNode;
 }
+
+interface TokensType {
+  accessToken: string;
+  refreshToken: string;
+  user: UserType;
+}
+export type DataGoogleLoginType = {
+  msg: string;
+  data: TokensType 
+}
+
 const defaultValues: AuthContextType = {
   user: undefined,
   accessToken: "",
@@ -40,16 +52,19 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({
   const [accessToken, setAccessToken] = useLocalStorage("accessToken", defaultValues.accessToken);
   const [refreshToken, setRefreshToken] = useLocalStorage("refreshToken", defaultValues.refreshToken);
 
-  function handleLogout() {
+  async function handleLogout() {
+    await requester.post<DataGoogleLoginType>(`/auth/logout`, {});
     googleLogout();
     setUser(undefined)
     setAccessToken("");
     setRefreshToken("")
+    requester.updateTokens("", "")
   }
 
   function handleLogin(accessToken:string, refreshToken:string, user: UserType) {
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
+    requester.updateTokens(accessToken, refreshToken)
     setUser(user)
   }
 
@@ -57,33 +72,29 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({
     console.log("Échec de la connexion.");
     setAccessToken("");
     setRefreshToken("");
+    requester.updateTokens("", "")
   }
 
   useEffect(() => {
     async function autoLogin() {
       const refreshToken = localStorage.getItem('IALingo-refreshToken');
       if(refreshToken && refreshToken !== ""){
-        const response = await fetch(`http://localhost:8000/auth/token/refresh`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            token: refreshToken,
-          }),
+        const response = await requester.post<DataGoogleLoginType>(`/auth/token/refresh`, {
+          token: refreshToken,
         });
 
-        if (!response.ok) {
+        if (!response.ok || !response.data) {
           setUser(undefined);
           setAccessToken("");
           setRefreshToken("");
+          requester.updateTokens("", "")
           return;
         }
   
-        const data = await response.json();
-        setUser(data.data.user)
-        setAccessToken(data.data.accessToken)
-        setRefreshToken(data.data.refreshToken)
+        setUser(response.data.data.user)
+        setAccessToken(response.data.data.accessToken)
+        setRefreshToken(response.data.data.refreshToken)
+        requester.updateTokens(response.data.data.accessToken, response.data.data.refreshToken)
       }
     }
     autoLogin();
