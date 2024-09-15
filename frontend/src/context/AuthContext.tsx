@@ -69,7 +69,7 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({
   }
 
   function handleLoginError() {
-    console.log("Échec de la connexion.");
+    console.error("Échec de la connexion.");
     setAccessToken("");
     setRefreshToken("");
     requester.updateTokens("", "")

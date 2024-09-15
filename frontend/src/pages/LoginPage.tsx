@@ -12,18 +12,15 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
   const login = useGoogleLogin({
     flow: 'auth-code',
     onSuccess: async (response) => {
-      console.log("Authorization Code:", response);
-
       const res = await requester.post<DataGoogleLoginType>('/auth/token', {
         code: response.code,
       });
 
       if(!res.ok || !res.data) {
-        console.log('Failed to get tokens')
+        console.error('Failed to get tokens')
         return;
       }
       const data = res.data
-      console.log("axios", data)
       handleLogin(data.data.accessToken, data.data.refreshToken, data.data.user)
     },
     onError: handleLoginError,
