@@ -5,6 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import requester from "../utils/requester";
 import TemplatePage from "./TemplatePage";
 import { ScreenEnum } from "../components/Navbar";
+import Title from "../components/Title";
 
 type LoginPageProps = {};
 
@@ -33,6 +34,7 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
   }
 
   return <TemplatePage screen={ScreenEnum.LoginPage}>
+            <Title text="Login Page" />
             <button onClick={() => login()}>Login with Google</button>
           </TemplatePage>
 };
