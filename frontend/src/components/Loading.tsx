@@ -1,5 +1,11 @@
+import "../styles/components/Loading.css"
+
 function Loading(): JSX.Element {
-  return <h2>🌀 Loading...</h2>;
+  return <div className="loader">
+      <span className="loader-spinner"></span>
+      <p>Please wait a little bit ...</p>
+      <p>We are pulling the data to display.</p>
+    </div>;
 }
 
 export default Loading;
