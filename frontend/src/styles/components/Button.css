@@ -40,3 +40,31 @@
   .button:active {
     opacity: .5;
   }
+
+  /* Submit */
+  
+  .btn-submit {
+    background: #7EACB5;
+    border: 1px solid #7EACB5;
+    color: white;
+  }
+
+  .btn-submit:hover,
+  .btn-submit:active {
+    color: #7EACB5;
+  }
+
+  /* Disabled */
+
+  .button:disabled  {
+    background: gray;
+    border: 1px solid gray;
+    color: white;
+  }
+
+  .button:disabled:hover,
+  .button:disabled:active {
+    color: white;
+    cursor: not-allowed;
+    opacity: 1;
+  }
