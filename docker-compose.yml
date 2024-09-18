@@ -25,11 +25,8 @@ services:
       - llm
     volumes:
       - ./ollama:/root/.ollama
-      - ./backend/start.sh:/start.sh
     ports:
       - "11434:11434"
-    entrypoint: ["/bin/sh", "-c"]
-    command: "/start.sh"
     restart: always
 
   frontend:
