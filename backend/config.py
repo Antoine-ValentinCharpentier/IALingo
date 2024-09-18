@@ -9,3 +9,5 @@ GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token"
 DATABASE_URL = os.getenv('DATABASE_URL', "sqlite:///./database.db")
 
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "https://localhost:11434")
+
+OLLAMA_MODEL_NAME = "llama3.1"

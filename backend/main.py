@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from middlewares.auth import JWTBearer
 
-from router.exercice import router as exercice_router 
+from router.exercise import router as exercice_router 
 from router.auth import router as auth_router 
 
 app = FastAPI()

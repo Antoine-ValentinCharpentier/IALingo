@@ -10,12 +10,17 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 
 import './styles/GlobalStyle.css'
+import VocabularyPage from "./pages/VocabularyPage";
 
 function App(): JSX.Element {
   const routes = useRoutes([
     {
       path: '/login',
       element: <PublicPage element={<LoginPage />} />,
+    },
+    {
+      path: '/vocabulary',
+      element: <PrivatePage element={<VocabularyPage />} />,
     },
     { 
       path: '*', 
