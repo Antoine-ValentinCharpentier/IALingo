@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import requester from "../utils/requester";
 
 import Button from "./Button";
+import Popup from "./Popup";
 
 import "../styles/components/QuizSection.css";
 
@@ -24,8 +25,89 @@ type QuizSectionProps = {
 interface AnswersResponse {
   mark: number;
   answers: {
-      [key: string]: string;
+    [key: string]: string;
   };
+}
+
+function getFeedback(score: number) : string {
+  if (score < 0 || score > 10) {
+      return "Invalid score. Please enter a score between 0 and 10.";
+  }
+
+  const feedbackMessages : { [key: number]: string[] } = {
+    0: [
+        "Don't be discouraged, every mistake is a chance to improve!", 
+        "Failure is part of the journey to success. Keep trying!", 
+        "Everyone starts somewhere. Don’t give up!", 
+        "It’s tough, but you can do better next time!"
+    ],
+    1: [
+        "A small step forward! You can build from here.", 
+        "Good effort, but there's a lot more potential to unlock.", 
+        "You’re just getting started. Keep practicing!", 
+        "Nice try, but with more effort, you'll see big improvements."
+    ],
+    2: [
+        "You're moving in the right direction. Keep practicing!", 
+        "Good start, but you’re capable of more.", 
+        "You’ve made progress. Continue pushing yourself!", 
+        "Nice effort! Practice will take you further."
+    ],
+    3: [
+        "Not bad! A bit more practice and you'll see great results.", 
+        "You’re on the right track. Keep going!", 
+        "Good job! Focus a bit more and you’ll get there.", 
+        "You're improving steadily! Just a little more effort."
+    ],
+    4: [
+        "You're getting there! A bit more effort will go a long way.", 
+        "Solid progress! Keep up the good work.", 
+        "You're halfway there, keep pushing!", 
+        "Nice job! Consistency will get you further."
+    ],
+    5: [
+        "Great! You’ve reached the halfway point. Now aim higher!", 
+        "Good progress! Keep building on this foundation.", 
+        "You're doing well, but there’s still room to grow.", 
+        "Halfway there! Just a bit more to reach excellence."
+    ],
+    6: [
+        "Good job! You’re above average, keep pushing forward.", 
+        "Nice work! You’ve got this, aim for even better.", 
+        "You're improving well. Stay focused and you'll excel!", 
+        "Great progress! You’re doing really well."
+    ],
+    7: [
+        "Well done! You’re getting close to mastering this.", 
+        "Great job! You're performing above expectations.", 
+        "Impressive! You’re on your way to excellence.", 
+        "You're doing really well, just a little more effort for perfection."
+    ],
+    8: [
+        "Fantastic work! You’re almost at the top.", 
+        "Great job! You're showing excellent understanding.", 
+        "Wonderful! Keep up this momentum and you’ll perfect it.", 
+        "Almost there! Just a bit more to reach full marks."
+    ],
+    9: [
+        "Amazing! You’re just one step away from perfection.", 
+        "Incredible work! You’re almost at the top.", 
+        "Fantastic! Just a small step and you’ll reach the max!", 
+        "You’re so close to perfection! Keep up the outstanding work."
+    ],
+    10: [
+        "Perfect score! You’ve mastered this completely.", 
+        "Flawless performance! You couldn’t have done better.", 
+        "Outstanding! You’ve achieved perfection.", 
+        "Perfect! You’ve hit the highest level of excellence."
+    ]
+};
+
+  const feedbackList = feedbackMessages[Math.floor(score)];
+
+  const randomFeedback = feedbackList[Math.floor(Math.random() * feedbackList.length)];
+
+  return randomFeedback;
 }
 
 const QuizSection: React.FC<QuizSectionProps> = ({
@@ -36,9 +118,8 @@ const QuizSection: React.FC<QuizSectionProps> = ({
   const [selectedAnswers, setSelectedAnswers] = useState<
     Record<number, string>
   >({});
-  const [realAnswers, setRealAnswers] = useState<null | Record<number, string>>(
-    null
-  );
+  const [realAnswers, setRealAnswers] = useState<null | AnswersResponse>(null);
+  const [openPopupResult, setOpenPopupResult] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,8 +131,6 @@ const QuizSection: React.FC<QuizSectionProps> = ({
   };
 
   const handleSubmit = async () => {
-    console.log("Réponses sélectionnées :", selectedAnswers);
-
     const response = await requester.post<AnswersResponse>(
       "/exercise/vocabulary/answers",
       { answers: selectedAnswers }
@@ -60,7 +139,8 @@ const QuizSection: React.FC<QuizSectionProps> = ({
       console.error("Error while fetching vocabulary quizz answers !");
       return;
     }
-    setRealAnswers(response.data.answers);
+    setRealAnswers(response.data);
+    setOpenPopupResult(true);
   };
 
   return (
@@ -77,8 +157,8 @@ const QuizSection: React.FC<QuizSectionProps> = ({
               <label
                 key={ansIndex}
                 className={
-                  !!realAnswers
-                    ? realAnswers[question.id] === answer
+                  !!realAnswers?.answers
+                    ? realAnswers.answers[question.id] === answer
                       ? "correct-answer"
                       : selectedAnswers[question.id] === answer
                       ? "bad-answer"
@@ -87,7 +167,7 @@ const QuizSection: React.FC<QuizSectionProps> = ({
                 }
               >
                 <input
-                  disabled={!!realAnswers}
+                  disabled={!!realAnswers?.answers}
                   type="radio"
                   name={`question-${index}`}
                   value={answer}
@@ -113,6 +193,23 @@ const QuizSection: React.FC<QuizSectionProps> = ({
           onClick={() => navigate("/")}
           additionalClass="btn-submit"
         />
+      )}
+      {openPopupResult && realAnswers?.mark && (
+        <Popup
+          title="Results"
+          onClosePopup={() => setOpenPopupResult(true)}
+          footer={
+            <>
+              <Button text="Look at the answers" onClick={() => setOpenPopupResult(false)} additionalClass="btn-submit"/>
+              <Button text="Go to home page" onClick={() => navigate("/")} />
+            </>
+          }
+        >
+          <div className="feedback">
+            <p>{getFeedback(realAnswers?.mark)}</p>
+            <p className="feedback-mark">{realAnswers?.mark.toFixed(1)}/10</p>
+          </div>
+        </Popup>
       )}
     </div>
   );

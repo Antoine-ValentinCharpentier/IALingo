@@ -19,7 +19,7 @@ const Popup: React.FC<PopupProps> = ({ title, children, footer, onClosePopup }) 
             <RxCross1 onClick={onClosePopup}/>
         </div>
         <div className="popup-content">{children}</div>
-        <div className="popup-bottom">{footer}</div>
+        <div className="popup-footer">{footer}</div>
       </div>
     </div>
   );

@@ -36,3 +36,13 @@
 .quizz-question-answers .bad-answer {
     background-color: #C96868;
 }
+
+/* Quizz Feedback */
+.feedback {
+    text-align: center;
+    font-size: 16px;
+}
+
+.feedback-mark {
+    font-weight: 600;
+}
