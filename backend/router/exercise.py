@@ -75,4 +75,4 @@ async def get_questions_vocabulary(request: Request):
                        "answers": random.sample(question.bad_answers + [question.right_answer], len(question.bad_answers) + 1)} 
                       for idx, question in enumerate(text_with_questions.questions)]
     
-    return {"text": text_with_questions.text, "questions": questions_shuffled}
+    return {"text": text_with_questions.article, "questions": questions_shuffled}
