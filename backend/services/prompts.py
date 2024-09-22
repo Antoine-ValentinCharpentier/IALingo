@@ -7,7 +7,13 @@ Génère une liste de {number_words} objets, où chaque objet possède mots en {
 
 PROMPT_EXERCISE_TEXT = """
 
-Génère un long texte/article écrit en {language} sur le thème de {theme}. Ensuite, génère une liste de trois questions portant sur ce texte. Pour chaque question, indique l'intitulé de la question, la réponse correcte ainsi que trois réponses incorrectes. Le tous doit être écrit en {language}.
+Tu es un professeur de {language} et tu aimerais évaluer tes étudiants sur une compréhension écrite. 
+
+Premièrement, tu dois donc générer sur un article de plus de 200 mots, écrit en {language} sur le thème de {theme}. 
+
+Deuxièmement, tu dois génèrer une liste de 3 questions portant sur cet article. Pour chaque question, indique l'intitulé de la question, la réponse correcte ainsi que trois réponses incorrectes.
+
+L'article, les questions, les réponses doivent être écrit en {language}.
 
 {format_instructions}
 

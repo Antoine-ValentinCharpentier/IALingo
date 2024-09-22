@@ -1,6 +1,7 @@
 from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain.prompts.prompt import PromptTemplate
+from langchain.output_parsers import OutputFixingParser
 
 from config import OLLAMA_BASE_URL, OLLAMA_MODEL_NAME
 from services.prompts import PROMPT_EXERCISE_QCM, PROMPT_EXERCISE_TEXT
@@ -24,7 +25,9 @@ def generate_qcm() -> ExerciseVocabulary :
     return questions
 
 def generate_text() -> ExerciseText :
-    parser = PydanticOutputParser(pydantic_object=ExerciseText)
+    initial_parser = PydanticOutputParser(pydantic_object=ExerciseText)
+    
+    parser = OutputFixingParser.from_llm(parser=initial_parser, llm=llm, max_retries=5)
     
     prompt_template = PromptTemplate(
         template=PROMPT_EXERCISE_TEXT,
@@ -34,6 +37,5 @@ def generate_text() -> ExerciseText :
     
     chain = prompt_template | llm | parser
     
-    questions = chain.invoke(input={"language": "Suédois", "theme": "l'argent"})
-    
+    questions = chain.invoke(input={"language": "Suédois", "theme": "l'argent"}) 
     return questions
