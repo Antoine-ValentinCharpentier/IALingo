@@ -18,6 +18,7 @@ export type QuestionsType = Question[];
 
 type QuizSectionProps = {
   questions: QuestionsType;
+  endpointAnswers: string;
   prefixStart?: string;
   prefixEnd?: string;
 };
@@ -102,7 +103,7 @@ function getFeedback(score: number) : string {
         "Perfect! You’ve hit the highest level of excellence."
     ]
 };
-
+  
   const feedbackList = feedbackMessages[Math.floor(score)];
 
   const randomFeedback = feedbackList[Math.floor(Math.random() * feedbackList.length)];
@@ -111,6 +112,7 @@ function getFeedback(score: number) : string {
 }
 
 const QuizSection: React.FC<QuizSectionProps> = ({
+  endpointAnswers,
   questions = [],
   prefixStart = "",
   prefixEnd = "",
@@ -132,11 +134,11 @@ const QuizSection: React.FC<QuizSectionProps> = ({
 
   const handleSubmit = async () => {
     const response = await requester.post<AnswersResponse>(
-      "/exercise/vocabulary/answers",
+      endpointAnswers,
       { answers: selectedAnswers }
     );
     if (!response.ok || !response.data) {
-      console.error("Error while fetching vocabulary quizz answers !");
+      console.error("Error while fetching answers !");
       return;
     }
     setRealAnswers(response.data);

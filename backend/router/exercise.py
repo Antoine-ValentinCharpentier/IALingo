@@ -13,7 +13,7 @@ router = APIRouter()
 
 users_exercises = {}
 
-class AnswersVocabularyRequest(BaseModel):
+class AnswersRequest(BaseModel):
     answers: Dict[int, str]
 
 @router.get("/vocabulary")
@@ -35,7 +35,7 @@ async def get_questions_vocabulary(request: Request):
     return data
 
 @router.post("/vocabulary/answers")
-async def get_questions_vocabulary(body: AnswersVocabularyRequest, request: Request):
+async def get_questions_vocabulary(body: AnswersRequest, request: Request):
     user_payload = getattr(request.state, "user", None)
     user_id = user_payload['sub']
     
@@ -51,7 +51,7 @@ async def get_questions_vocabulary(body: AnswersVocabularyRequest, request: Requ
     
     res_answers = {idx_question: dictionnary[idx_question].translated_word for idx_question in answers.keys()}
         
-    del users_exercises[user_id]
+    del users_exercises[user_id]['vocabulary']
     
     return {"mark": mark, "answers": res_answers}
 
@@ -76,3 +76,24 @@ async def get_questions_vocabulary(request: Request):
                       for idx, question in enumerate(text_with_questions.questions)]
     
     return {"text": text_with_questions.article, "questions": questions_shuffled}
+
+@router.post("/text/answers")
+async def get_questions_vocabulary(body: AnswersRequest, request: Request):
+    user_payload = getattr(request.state, "user", None)
+    user_id = user_payload['sub']
+    
+    if (not user_id in users_exercises) or (not "text_with_questions" in users_exercises[user_id]):
+        raise HTTPException(status_code=400, detail="You need to generate a reading comprehension before trying to get its answers")
+    
+    answers = body.answers
+    questions = users_exercises[user_id]['text_with_questions'].questions
+
+    correct_count =  sum(1 for idx_question, answer in answers.items() if questions[idx_question].right_answer == answer)
+    total_questions = len(answers.keys())
+    mark = (correct_count / total_questions) * 10
+    
+    res_answers = {idx_question: questions[idx_question].right_answer for idx_question in answers.keys()}
+        
+    del users_exercises[user_id]['text_with_questions']
+    
+    return {"mark": mark, "answers": res_answers}

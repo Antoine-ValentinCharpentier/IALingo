@@ -11,7 +11,8 @@ import "../styles/components/Navbar.css"
 export enum ScreenEnum {
     HomePage,
     LoginPage,
-    VocabularyPage
+    VocabularyPage,
+    TextPage
 }
 
 type NavbarProps = {
@@ -47,6 +48,17 @@ const Navbar: React.FC<NavbarProps> = ({isOpen, screen}) => {
                 >
                     {screen === ScreenEnum.VocabularyPage && (<IoIosArrowForward />)}
                     <p>Vocabulary</p>
+                </div>
+                <div 
+                    className={screen === ScreenEnum.TextPage ? "navbar-item navbar-item-active" : "navbar-item navbar-item-active"}
+                    onClick={() => {
+                        if(screen !== ScreenEnum.TextPage) {
+                            navigate('/text')
+                        }
+                    }}
+                >
+                    {screen === ScreenEnum.TextPage && (<IoIosArrowForward />)}
+                    <p>Reading comprehension</p>
                 </div>
             </div>
             <div className="navbar-footer">

@@ -8,9 +8,10 @@ import { AuthContextProvider } from './context/AuthContext';
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+import VocabularyPage from "./pages/VocabularyPage";
+import TextPage from "./pages/TextPage";
 
 import './styles/GlobalStyle.css'
-import VocabularyPage from "./pages/VocabularyPage";
 
 function App(): JSX.Element {
   const routes = useRoutes([
@@ -21,6 +22,10 @@ function App(): JSX.Element {
     {
       path: '/vocabulary',
       element: <PrivatePage element={<VocabularyPage />} />,
+    },
+    {
+      path: '/text',
+      element: <PrivatePage element={<TextPage />} />,
     },
     { 
       path: '*', 

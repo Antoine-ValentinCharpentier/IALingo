@@ -7,18 +7,26 @@ import requester from "../utils/requester";
 import Loading from "../components/Loading";
 import QuizSection, { QuestionsType } from "../components/QuizSection";
 
-type VocabularyPageProps = {};
+import "../styles/pages/TextPage.css";
 
-const VocabularyPage: React.FC<VocabularyPageProps> = (): JSX.Element => {
+type TextPageProps = {};
+
+type QuestionReading = {
+  text: string;
+  questions: QuestionsType;
+};
+
+const TextPage: React.FC<TextPageProps> = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
-  const [questions, setQuestions] = useState<QuestionsType>([]);
+  const [questions, setQuestions] = useState<QuestionReading>({
+    text: "",
+    questions: [],
+  });
 
   useEffect(() => {
     async function fetchQuestions() {
       setIsLoading(true);
-      const response = await requester.get<QuestionsType>(
-        "/exercise/vocabulary"
-      );
+      const response = await requester.get<QuestionReading>("/exercise/text");
       setIsLoading(false);
       if (!response.ok || !response.data) {
         console.error(
@@ -30,26 +38,28 @@ const VocabularyPage: React.FC<VocabularyPageProps> = (): JSX.Element => {
     }
     fetchQuestions();
     return () => {
-      setQuestions([]);
+      setQuestions({ text: "", questions: [] });
       setIsLoading(false);
     };
   }, []);
 
   return (
-    <TemplatePage screen={ScreenEnum.VocabularyPage}>
-      <Title text="VocabularyPage" />
+    <TemplatePage screen={ScreenEnum.TextPage}>
+      <Title text="TextPage" />
       {isLoading ? (
         <Loading />
       ) : (
-        <QuizSection
-          questions={questions}
-          endpointAnswers="/exercise/text/answers"
-          prefixStart="What is the English translation of the word : "
-          prefixEnd=" ?"
-        />
+        <>
+          <h2 className="text-statement">Read the following text and answer the questions</h2>
+          <p className="text">{questions.text}</p>
+          <QuizSection
+            questions={questions.questions}
+            endpointAnswers="/exercise/text/answers"
+          />
+        </>
       )}
     </TemplatePage>
   );
 };
 
-export default VocabularyPage;
+export default TextPage;
