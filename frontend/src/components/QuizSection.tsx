@@ -196,10 +196,10 @@ const QuizSection: React.FC<QuizSectionProps> = ({
           additionalClass="btn-submit"
         />
       )}
-      {openPopupResult && realAnswers?.mark && (
+      {openPopupResult && realAnswers!== null && (
         <Popup
           title="Results"
-          onClosePopup={() => setOpenPopupResult(true)}
+          onClosePopup={() => setOpenPopupResult(false)}
           footer={
             <>
               <Button text="Look at the answers" onClick={() => setOpenPopupResult(false)} additionalClass="btn-submit"/>
