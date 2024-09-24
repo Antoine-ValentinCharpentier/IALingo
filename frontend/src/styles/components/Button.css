@@ -1,70 +1,93 @@
-
-
 .button {
-    width: 100%;
-    background: #C96868;
-    
-    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-    box-sizing: border-box;
-    
-    cursor: pointer;
-    display: inline-block;
+  width: 100%;
+  background: #c96868;
 
-    font-size: 24px;
-    font-weight: 600;
-    font-family: cursive;
-    line-height: 16px;
-    color: #FFFFFF;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
 
-    outline: 0;
-    border: 1px solid #C96868;
-    border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
 
-    padding: 12px 14px;
-    
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: cursive;
+  line-height: 16px;
+  color: #ffffff;
 
-    text-align: center;
-    vertical-align: middle;
-  }
-  
-  .button:hover,
-  .button:active {
-    background-color: initial;
-    background-position: 0 0;
-    color: #C96868;
-  }
-  
-  .button:active {
-    opacity: .5;
-  }
+  outline: 0;
+  border: 1px solid #c96868;
+  border-radius: 6px;
 
-  /* Submit */
-  
-  .btn-submit {
-    background: #7EACB5;
-    border: 1px solid #7EACB5;
-    color: white;
-  }
+  padding: 12px 14px;
 
-  .btn-submit:hover,
-  .btn-submit:active {
-    color: #7EACB5;
-  }
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 
-  /* Disabled */
+  text-align: center;
+  vertical-align: middle;
+}
 
-  .button:disabled  {
-    background: gray;
-    border: 1px solid gray;
-    color: white;
-  }
+.button:hover,
+.button:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #c96868;
+}
 
-  .button:disabled:hover,
-  .button:disabled:active {
-    color: white;
-    cursor: not-allowed;
-    opacity: 1;
-  }
+.button:active {
+  opacity: 0.5;
+}
+
+/* Submit */
+
+.btn-submit {
+  background: #7eacb5;
+  border: 1px solid #7eacb5;
+  color: white;
+}
+
+.btn-submit:hover,
+.btn-submit:active {
+  color: #7eacb5;
+}
+
+/* Btn Google */
+.btn-google {
+  background: white;
+  border: 1px solid black;
+  color: black;
+  font-weight: 400;
+  font-size: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-google:hover,
+.btn-google:active {
+  background: black;
+  color: white;
+}
+
+.btn-google svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Disabled */
+
+.button:disabled {
+  background: gray;
+  border: 1px solid gray;
+  color: white;
+}
+
+.button:disabled:hover,
+.button:disabled:active {
+  color: white;
+  cursor: not-allowed;
+  opacity: 1;
+}

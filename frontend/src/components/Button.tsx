@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/components/Button.css";
 
 type ButtonProps = {
-    text: string;
+    text: string | JSX.Element;
     onClick: () => void;
     disabled?: boolean;
     additionalClass?: string;
