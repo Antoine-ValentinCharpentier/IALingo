@@ -1,93 +1,92 @@
 .navbar-container {
-    max-width: 300px;
-    width: 80%;
-    height: 100%;
+  max-width: 300px;
+  width: 80%;
+  height: 100%;
 
-    position: absolute;
-    left: 0;
-    top: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
 
-    background-color: #FFF4EA;
+  background-color: #fff4ea;
 
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    z-index: 100;
+  z-index: 100;
 }
 
 .navbar-container::after {
-    content: "";
+  content: "";
 
-    width: 10px;
-    height: 100%;
+  width: 10px;
+  height: 100%;
 
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateX(100%);
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
 
-    background: linear-gradient(0deg, 
-    #DFCCFB 0%, 
-    #DFCCFB 12%, 
-    #F2C18D 12%, 
-    #F2C18D 24%, 
-    #E0E5B6 24%, 
-    #E0E5B6 36%, 
-    #7EACB5 36%, 
-    #7EACB5 48%, 
-    #FFF4EA 48%, 
-    #FFF4EA 60%, 
-    #F7B5CA 60%, 
-    #F7B5CA 72%, 
-    #FADFA1 72%, 
-    #FADFA1 84%, 
-    #C96868 84%, 
-    #C96868 100%
-);;
+  background: linear-gradient(
+    0deg,
+    #dfccfb 0%,
+    #dfccfb 12%,
+    #f2c18d 12%,
+    #f2c18d 24%,
+    #e0e5b6 24%,
+    #e0e5b6 36%,
+    #7eacb5 36%,
+    #7eacb5 48%,
+    #fff4ea 48%,
+    #fff4ea 60%,
+    #f7b5ca 60%,
+    #f7b5ca 72%,
+    #fadfa1 72%,
+    #fadfa1 84%,
+    #c96868 84%,
+    #c96868 100%
+  );
 }
 
 .navbar-open {
-    transform: translateX(0%);
+  transform: translateX(0%);
 }
 
 .navbar-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 20px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 20px;
 }
 
 .navbar-footer {
-    padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 .navbar-item {
-    font-size: 20px;
-    font-family: cursive;
-    
-    width: 100%;
-    margin: 0 auto;
+  font-size: 20px;
+  font-family: cursive;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  width: 100%;
+  margin: 0 auto;
 
-    border-radius: 10px;
-    padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  color: #c96868;
 }
 
 .navbar-item svg {
-    height: 1em;
-    width: 1em;
-}
-
-.navbar-item-active {
-    color: #C96868;
+  height: 1em;
+  width: 1em;
 }
 
 .navbar-item:hover {
-    color: #C96868;
-    background-color: white;
+  color: #c96868;
+  background-color: white;
 }
