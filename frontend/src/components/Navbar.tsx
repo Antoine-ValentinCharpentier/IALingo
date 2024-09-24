@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ isOpen, screen }) => {
     {
       label: "Reading comprehension",
       screen: ScreenEnum.TextPage,
-      path: "/text",
+      path: "/reading",
     },
   ];
 

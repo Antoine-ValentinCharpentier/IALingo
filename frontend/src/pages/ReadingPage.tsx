@@ -7,16 +7,16 @@ import requester from "../utils/requester";
 import Loading from "../components/Loading";
 import QuizSection, { QuestionsType } from "../components/QuizSection";
 
-import "../styles/pages/TextPage.css";
+import "../styles/pages/ReadingPage.css";
 
-type TextPageProps = {};
+type ReadingPageProps = {};
 
 type QuestionReading = {
   text: string;
   questions: QuestionsType;
 };
 
-const TextPage: React.FC<TextPageProps> = (): JSX.Element => {
+const ReadingPage: React.FC<ReadingPageProps> = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionReading>({
     text: "",
@@ -26,7 +26,7 @@ const TextPage: React.FC<TextPageProps> = (): JSX.Element => {
   useEffect(() => {
     async function fetchQuestions() {
       setIsLoading(true);
-      const response = await requester.get<QuestionReading>("/exercise/text");
+      const response = await requester.get<QuestionReading>("/exercise/reading");
       setIsLoading(false);
       if (!response.ok || !response.data) {
         console.error(
@@ -54,7 +54,7 @@ const TextPage: React.FC<TextPageProps> = (): JSX.Element => {
           <p className="text">{questions.text}</p>
           <QuizSection
             questions={questions.questions}
-            endpointAnswers="/exercise/text/answers"
+            endpointAnswers="/exercise/reading/answers"
           />
         </>
       )}
@@ -62,4 +62,4 @@ const TextPage: React.FC<TextPageProps> = (): JSX.Element => {
   );
 };
 
-export default TextPage;
+export default ReadingPage;

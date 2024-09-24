@@ -43,7 +43,7 @@ const VocabularyPage: React.FC<VocabularyPageProps> = (): JSX.Element => {
       ) : (
         <QuizSection
           questions={questions}
-          endpointAnswers="/exercise/text/answers"
+          endpointAnswers="/exercise/vocabulary/answers"
           prefixStart="What is the English translation of the word : "
           prefixEnd=" ?"
         />

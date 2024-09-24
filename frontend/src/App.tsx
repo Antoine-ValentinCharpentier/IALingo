@@ -9,7 +9,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import VocabularyPage from "./pages/VocabularyPage";
-import TextPage from "./pages/TextPage";
+import ReadingPage from "./pages/ReadingPage";
 
 import './styles/GlobalStyle.css'
 
@@ -24,8 +24,8 @@ function App(): JSX.Element {
       element: <PrivatePage element={<VocabularyPage />} />,
     },
     {
-      path: '/text',
-      element: <PrivatePage element={<TextPage />} />,
+      path: '/reading',
+      element: <PrivatePage element={<ReadingPage />} />,
     },
     { 
       path: '*', 

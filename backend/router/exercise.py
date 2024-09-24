@@ -55,7 +55,7 @@ async def get_questions_vocabulary(body: AnswersRequest, request: Request):
     
     return {"mark": mark, "answers": res_answers}
 
-@router.get("/text")
+@router.get("/reading")
 async def get_questions_vocabulary(request: Request):
     user_payload = getattr(request.state, "user", None)
     user_id = user_payload['sub']
@@ -77,7 +77,7 @@ async def get_questions_vocabulary(request: Request):
     
     return {"text": text_with_questions.article, "questions": questions_shuffled}
 
-@router.post("/text/answers")
+@router.post("/reading/answers")
 async def get_questions_vocabulary(body: AnswersRequest, request: Request):
     user_payload = getattr(request.state, "user", None)
     user_id = user_payload['sub']
