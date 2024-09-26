@@ -8,3 +8,5 @@ langchain-ollama==0.1.3
 langchain-core==0.2.39
 langsmith==0.1.118
 sqlalchemy==2.0.34
+passlib==1.7.4
+python-multipart==0.0.10

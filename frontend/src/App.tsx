@@ -10,11 +10,16 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import VocabularyPage from "./pages/VocabularyPage";
 import ReadingPage from "./pages/ReadingPage";
+import RegisterPage from "./pages/RegisterPage";
 
 import './styles/GlobalStyle.css'
 
 function App(): JSX.Element {
   const routes = useRoutes([
+    {
+      path: '/register',
+      element: <PublicPage element={<RegisterPage />} />,
+    },
     {
       path: '/login',
       element: <PublicPage element={<LoginPage />} />,
