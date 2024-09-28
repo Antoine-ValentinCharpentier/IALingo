@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import AuthContext, { AuthContextType } from "../context/AuthContext";
 
@@ -11,6 +12,7 @@ import requester from "../utils/requester";
 
 import { ScreenEnum } from "../components/Navbar";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 interface UserRegister {
   username: string;
   email: string;
@@ -43,9 +45,10 @@ const RegisterPage: React.FC<RegisterPageProps> = (): JSX.Element => {
     if (
       !userData.username.trim() ||
       !userData.email.trim() ||
-      !userData.password.trim()
+      !userData.password.trim() ||
+      !emailRegex.test(userData.email.trim()) 
     ) {
-      console.error("Error : missing values register");
+      toast.error("Please enter a valid username, email and password !");
       return;
     }
     const response = await requester.post<RegisterResponse>(
@@ -53,9 +56,10 @@ const RegisterPage: React.FC<RegisterPageProps> = (): JSX.Element => {
       userData
     );
     if (!response.ok) {
-      console.error("Error : register");
+      toast.error("An account associated with this email already exists.");
       return;
     }
+    toast.success("The account was successfully created");
     navigate("/login");
   };
 
@@ -98,9 +102,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (): JSX.Element => {
           required
         />
       </div>
-      <button onClick={handleRegister}>
-        Register
-      </button>
+      <button onClick={handleRegister}>Register</button>
 
       <p onClick={() => navigate("/login")}>
         You have already an account ? Click here to go to the login page

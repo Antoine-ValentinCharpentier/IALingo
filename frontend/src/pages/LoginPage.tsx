@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 
@@ -17,6 +18,8 @@ import Button from "../components/Button";
 import requester from "../utils/requester";
 
 import { ScreenEnum } from "../components/Navbar";
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface LoginLocalResponse {
   message: string;
@@ -49,7 +52,7 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
       );
 
       if (!res.ok || !res.data) {
-        console.error("Failed to get tokens");
+        toast.error("Please log in using your password.");
         return;
       }
       const data = res.data;
@@ -63,8 +66,8 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
   });
 
   const localLogin = async () => {
-    if (!email.trim() || !password.trim()) {
-      console.error("Please enter a valid username & password");
+    if (!emailRegex.test(email) || !email.trim() || !password.trim()) {
+      toast.error("Please enter a valid email and password !");
       return;
     }
     const response = await requester.post<LoginLocalResponse>(
@@ -75,7 +78,7 @@ const LoginPage: React.FC<LoginPageProps> = (): JSX.Element => {
       }
     );
     if (!response.ok || !response.data) {
-      console.error("Error while loging !");
+      toast.error("Invalid email or password !");
       return;
     }
     handleLogin(
