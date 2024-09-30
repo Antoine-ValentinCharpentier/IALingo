@@ -1,0 +1,15 @@
+.quizz {
+    font-family: cursive;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Quizz Feedback */
+.feedback {
+    text-align: center;
+    font-size: 16px;
+}
+
+.feedback-mark {
+    font-weight: 600;
+}

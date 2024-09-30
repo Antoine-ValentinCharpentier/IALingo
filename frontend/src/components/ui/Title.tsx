@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/components/Title.css";
+import "../../assets/styles/components/ui/Title.css";
 
 type ButtonProps = {
     text: string;

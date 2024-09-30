@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 
-import AuthContext, { AuthContextType } from "../context/AuthContext";
-import Button from "./Button";
+import AuthContext, { AuthContextType } from "../../context/AuthContext";
+import Button from "../form/Button";
 
-import "../styles/components/Navbar.css";
+import "../../assets/styles/components/ui/Navbar.css";
 
 export enum ScreenEnum {
   HomePage,

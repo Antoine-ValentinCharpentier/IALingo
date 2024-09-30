@@ -1,9 +1,3 @@
-.quizz {
-    font-family: cursive;
-    width: 100%;
-    margin: 0 auto;
-}
-
 .quizz-question-title {
     margin: 15px 0;
 }
@@ -35,14 +29,4 @@
 
 .quizz-question-answers .bad-answer {
     background-color: #C96868;
-}
-
-/* Quizz Feedback */
-.feedback {
-    text-align: center;
-    font-size: 16px;
-}
-
-.feedback-mark {
-    font-weight: 600;
 }

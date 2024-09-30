@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/components/Book.css";
+import "../../assets/styles/components/ui/Book.css";
 
 type BookProps = {};
 

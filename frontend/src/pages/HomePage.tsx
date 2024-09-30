@@ -1,8 +1,8 @@
 import React from "react";
 
-import TemplatePage from "./TemplatePage";
-import { ScreenEnum } from "../components/Navbar";
-import Title from "../components/Title";
+import TemplatePage from "../layout/TemplatePage";
+import { ScreenEnum } from "../components/ui/Navbar";
+import Title from "../components/ui/Title";
 
 type HomePageProps = {};
 

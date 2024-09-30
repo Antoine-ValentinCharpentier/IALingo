@@ -2,7 +2,7 @@ import React, { Suspense, useContext, ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import AuthContext, {AuthContextType} from '../context/AuthContext'; 
-import Loading from '../components/Loading';
+import Loading from '../components/ui/Loading';
 
 type PrivatePageProps = {
   element: ReactNode;

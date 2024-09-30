@@ -4,13 +4,13 @@ import { toast } from "react-toastify";
 
 import AuthContext, { AuthContextType } from "../context/AuthContext";
 
-import TemplatePage from "./TemplatePage";
-import Title from "../components/Title";
-import Book from "../components/Book";
+import TemplatePage from "../layout/TemplatePage";
+import Title from "../components/ui/Title";
+import Book from "../components/ui/Book";
 
 import requester from "../utils/requester";
 
-import { ScreenEnum } from "../components/Navbar";
+import { ScreenEnum } from "../components/ui/Navbar";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 interface UserRegister {

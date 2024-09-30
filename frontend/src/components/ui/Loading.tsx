@@ -1,4 +1,4 @@
-import "../styles/components/Loading.css"
+import "../../assets/styles/components/ui/Loading.css"
 
 function Loading(): JSX.Element {
   return <div className="loader">

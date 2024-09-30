@@ -1,10 +1,10 @@
 import React, { ReactNode, useContext, useState } from "react";
-import Header from "../components/Header";
-import Navbar, { ScreenEnum } from "../components/Navbar";
+import Header from "../components/ui/Header";
+import Navbar, { ScreenEnum } from "../components/ui/Navbar";
 
 import AuthContext from "../context/AuthContext";
 
-import '../styles/pages/TemplatePage.css'
+import '../assets/styles/layout/TemplatePage.css'
 
 type TemplatePageProps = {
     children: ReactNode;

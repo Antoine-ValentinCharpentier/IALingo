@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import TemplatePage from "./TemplatePage";
-import { ScreenEnum } from "../components/Navbar";
-import Title from "../components/Title";
+import TemplatePage from "../layout/TemplatePage";
+import { ScreenEnum } from "../components/ui/Navbar";
+import Title from "../components/ui/Title";
 import requester from "../utils/requester";
-import Loading from "../components/Loading";
-import QuizSection, { QuestionsType } from "../components/QuizSection";
+import Loading from "../components/ui/Loading";
+import QuizSection, { QuestionsType } from "../components/features/exercises/QuizSection";
 
-import "../styles/pages/ReadingPage.css";
+import "../assets/styles/pages/ReadingPage.css";
 
 type ReadingPageProps = {};
 

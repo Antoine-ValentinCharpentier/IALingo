@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../styles/components/Button.css";
+import "../../assets/styles/components/form/Button.css"
 
 type ButtonProps = {
     text: string | JSX.Element;

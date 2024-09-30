@@ -10,14 +10,14 @@ import AuthContext, {
   UserType,
 } from "../context/AuthContext";
 
-import TemplatePage from "./TemplatePage";
-import Title from "../components/Title";
-import Book from "../components/Book";
-import Button from "../components/Button";
+import TemplatePage from "../layout/TemplatePage";
+import Title from "../components/ui/Title";
+import Book from "../components/ui/Book";
+import Button from "../components/form/Button";
 
 import requester from "../utils/requester";
 
-import { ScreenEnum } from "../components/Navbar";
+import { ScreenEnum } from "../components/ui/Navbar";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

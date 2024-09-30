@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { RxCross1 } from "react-icons/rx";
 
-import "../styles/components/Popup.css";
+import "../../assets/styles/components/form/Popup.css";
 
 type PopupProps = {
   title: string;

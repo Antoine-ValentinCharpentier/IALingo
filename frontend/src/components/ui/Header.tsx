@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import AuthContext from "../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 
-import "../styles/components/Header.css"
+import "../../assets/styles/components/ui/Header.css"
 
 type HeaderProps = {
     setIsNavbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
