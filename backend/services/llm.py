@@ -10,7 +10,9 @@ from models.schemas_langchain import ExerciseVocabulary, ExerciseText
 llm = ChatOllama(model=OLLAMA_MODEL_NAME, temperature=0.8, base_url=OLLAMA_BASE_URL)
 
 def generate_qcm() -> ExerciseVocabulary :
-    parser = PydanticOutputParser(pydantic_object=ExerciseVocabulary)
+    initial_parser = PydanticOutputParser(pydantic_object=ExerciseVocabulary)
+    
+    parser = OutputFixingParser.from_llm(parser=initial_parser, llm=llm, max_retries=5)
 
     prompt_template = PromptTemplate(
         template=PROMPT_EXERCISE_QCM,
